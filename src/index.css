@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/* Custom variables & background */
+:root {
+  --bg-1: #031028;
+  --bg-2: #05264a;
+  --bg-3: #083a6d;
+  --card: rgba(255, 255, 255, 0.04);
+  --muted: rgba(255, 255, 255, 0.68);
+  --text: #e6f0ff;
+  --accent: #67a7ff;
+  --shadow: 0 10px 30px rgba(3, 18, 40, 0.6);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(1200px 800px at 10% 10%, rgba(103, 156, 255, 0.06), transparent 10%),
+    radial-gradient(900px 500px at 90% 90%, rgba(40, 120, 255, 0.04), transparent 8%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 40%, var(--bg-3) 100%);
+  color: var(--text);
+}
+
+/* Floating blobs */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.12;
+  animation: floaty 8s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.b1 {
+  background: radial-gradient(circle at 30% 30%, rgba(103, 167, 255, 0.9), rgba(103, 167, 255, 0.2));
+  left: -10%;
+  top: -12%;
+  width: 420px;
+  height: 420px;
+  opacity: 0.16;
+  animation-duration: 10s;
+}
+
+.b2 {
+  background: radial-gradient(circle at 70% 70%, rgba(32, 110, 255, 0.75), rgba(32, 110, 255, 0.08));
+  right: -6%;
+  bottom: -8%;
+  width: 520px;
+  height: 520px;
+  opacity: 0.1;
+  animation-duration: 12s;
+}
+
+.b3 {
+  background: radial-gradient(circle at 50% 50%, rgba(110, 200, 255, 0.6), rgba(110, 200, 255, 0.04));
+  left: 30%;
+  bottom: 10%;
+  width: 300px;
+  height: 300px;
+  opacity: 0.08;
+  animation-duration: 14s;
+}
+
+@keyframes floaty {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(12px);
+  }
+}
+
+/* Parallax eye */
+.eye {
+  position: fixed;
+  left: 50%;
+  top: 35%;
+  width: 520px;
+  height: 520px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+.iris {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 35%, rgba(140, 190, 255, 0.95) 0%, rgba(90, 150, 255, 0.12) 30%, transparent 60%);
+  filter: blur(36px);
+  transition: transform 0.12s linear;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  margin-left: 6px;
+  background: var(--accent);
+  border-radius: 2px;
+  vertical-align: bottom;
+  opacity: 0.9;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
