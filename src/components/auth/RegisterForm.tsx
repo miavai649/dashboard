@@ -2,38 +2,33 @@ import type { FormEvent } from "react";
 import InputField from "./InputField";
 import { MailIcon, LockIcon, UserIcon } from "../icons";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import { registerUser } from "../../lib/api";
 
-interface Props {
-  onCancel: () => void;
-}
+type TUserData = {
+  name: string;
+  email: string;
+  password: string;
+};
 
-export default function RegisterForm({ onCancel }: Props) {
+export default function RegisterForm() {
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      toast.success(data?.message || "Registration successful");
+    },
+    onError: (error: string) => {
+      toast.error(error || "Registration failed");
+    }
+  });
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    console.log("Register Form Data:", data);
-
-    fetch("http://localhost:5000/api/v1/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data?.success) {
-          toast.success(data?.message);
-        } else {
-          toast.error(data?.message);
-        }
-      })
-      .catch((error) => {
-        toast.error(error?.message || "Registration failed");
-      });
+    mutation.mutate(data as TUserData);
   };
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -48,7 +43,7 @@ export default function RegisterForm({ onCancel }: Props) {
         </button>
         <button
           type="button"
-          onClick={onCancel}
+          // onClick={onCancel}
           className="px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition">
           Cancel
         </button>
