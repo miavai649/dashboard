@@ -1,9 +1,9 @@
 import type { FormEvent } from "react";
 import InputField from "./InputField";
 import { MailIcon, LockIcon, UserIcon } from "../icons";
-import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "../../lib/api";
+import { toast } from "react-toastify";
 
 type TUserData = {
   name: string;
@@ -11,14 +11,19 @@ type TUserData = {
   password: string;
 };
 
-export default function RegisterForm() {
+interface IRegisterFormProps {
+  onCancel: () => void;
+}
+
+export default function RegisterForm({ onCancel }: IRegisterFormProps) {
   const mutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
       toast.success(data?.message || "Registration successful");
+      onCancel();
     },
     onError: (error: string) => {
-      toast.error(error || "Registration failed");
+      toast.error(error || "Registration failed", { position: "bottom-center" });
     }
   });
 
@@ -43,7 +48,7 @@ export default function RegisterForm() {
         </button>
         <button
           type="button"
-          // onClick={onCancel}
+          onClick={onCancel}
           className="px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition">
           Cancel
         </button>

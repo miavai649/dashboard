@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import AuthPage from "./pages/AuthPage";
-import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer, Zoom } from "react-toastify";
 
 const queryClient = new QueryClient();
 
@@ -12,7 +12,19 @@ function App() {
         <Routes>
           <Route path="/*" element={<AuthPage />} />
         </Routes>
-        <Toaster />
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+          theme="colored"
+          transition={Zoom}
+        />
       </BrowserRouter>
     </QueryClientProvider>
   );
