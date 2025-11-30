@@ -1,22 +1,45 @@
 import type { FormEvent } from "react";
 import InputField from "./InputField";
 import { MailIcon, LockIcon, UserIcon } from "../icons";
+import toast from "react-hot-toast";
 
 interface Props {
   onCancel: () => void;
 }
 
 export default function RegisterForm({ onCancel }: Props) {
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Register submitted");
-  };
 
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    console.log("Register Form Data:", data);
+
+    fetch("http://localhost:5000/api/v1/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?.success) {
+          toast.success(data?.message);
+        } else {
+          toast.error(data?.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error?.message || "Registration failed");
+      });
+  };
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <InputField label="Full Name" type="text" placeholder="John Doe" icon={<UserIcon />} required />
-      <InputField label="Email" type="email" placeholder="you@example.com" icon={<MailIcon />} required />
-      <InputField label="Password" type="password" placeholder="At least 8 characters" icon={<LockIcon />} required />
+      <InputField label="Full Name" type="text" placeholder="John Doe" icon={<UserIcon />} required name="name" />
+      <InputField label="Email" type="email" placeholder="you@example.com" icon={<MailIcon />} required name="email" />
+      <InputField label="Password" type="password" placeholder="Enter your password" icon={<LockIcon />} required name="password" />
       <div className="flex gap-3 pt-3">
         <button
           type="submit"
