@@ -43,13 +43,13 @@ export default function RegisterForm({ onCancel }: IRegisterFormProps) {
       <div className="flex gap-3 pt-3">
         <button
           type="submit"
-          className="px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 transition">
+          className="px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 cursor-pointer">
           Create account
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition">
+          className="px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition cursor-pointer">
           Cancel
         </button>
       </div>
