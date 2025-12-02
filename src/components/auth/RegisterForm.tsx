@@ -23,7 +23,7 @@ export default function RegisterForm({ onCancel }: IRegisterFormProps) {
       onCancel();
     },
     onError: (error: string) => {
-      toast.error(error || "Registration failed", { position: "bottom-center" });
+      toast.error(error || "Registration failed");
     }
   });
 
