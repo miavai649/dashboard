@@ -1,8 +1,8 @@
 import InputField from "../form/InputField";
 import { LockIcon, MailIcon } from "../icons";
-// import { useMutation } from "@tanstack/react-query";
-// import { loginUser } from "../../lib/api";
-// import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "../../lib/api";
+import { toast } from "react-toastify";
 import CustomForm from "../form/CustomForm";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 
@@ -10,21 +10,21 @@ interface Props {
   onForgot?: () => void;
 }
 
-// type TLoginData = {
-//   email: string;
-//   password: string;
-// };
+type TLoginData = {
+  email: string;
+  password: string;
+};
 
 export default function LoginForm({ onForgot }: Props) {
-  // const mutation = useMutation({
-  //   mutationFn: loginUser,
-  //   onSuccess: (data) => {
-  //     toast.success(data?.message || "Login successful");
-  //   },
-  //   onError: (error: string) => {
-  //     toast.error(error || "Login failed");
-  //   }
-  // });
+  const mutation = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      toast.success(data?.message || "Login successful");
+    },
+    onError: (error: string) => {
+      toast.error(error || "Login failed");
+    }
+  });
 
   // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();
@@ -36,8 +36,7 @@ export default function LoginForm({ onForgot }: Props) {
   // };
 
   const handleLogin: SubmitHandler<FieldValues> = (data) => {
-    // mutation.mutate(data as TLoginData);
-    console.log("Login data submitted:", data);
+    mutation.mutate(data as TLoginData);
   };
 
   return (
