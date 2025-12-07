@@ -40,7 +40,7 @@ export default function LoginForm({ onForgot }: Props) {
   };
 
   return (
-    <CustomForm onSubmit={handleLogin}>
+    <CustomForm onSubmit={handleLogin} isReset={true}>
       <div className="space-y-5">
         <InputField
           label="Email"
