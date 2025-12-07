@@ -5,6 +5,8 @@ import { loginUser } from "../../lib/api";
 import { toast } from "react-toastify";
 import CustomForm from "../form/CustomForm";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
+import { useAuth } from "../../hook/useAuth";
+import { useNavigate } from "react-router";
 
 interface Props {
   onForgot?: () => void;
@@ -16,24 +18,21 @@ type TLoginData = {
 };
 
 export default function LoginForm({ onForgot }: Props) {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  // Mutation for user login
   const mutation = useMutation({
     mutationFn: loginUser,
-    onSuccess: (data) => {
-      toast.success(data?.message || "Login successful");
+    onSuccess: (response) => {
+      toast.success(response?.message || "Login successful");
+      login({ name: response?.data?.name, email: response?.data?.email });
+      navigate("/", { replace: true });
     },
     onError: (error: string) => {
       toast.error(error || "Login failed");
     }
   });
-
-  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData(e.currentTarget);
-  //   const data = Object.fromEntries(formData.entries());
-
-  //   mutation.mutate(data as TLoginData);
-  // };
 
   const handleLogin: SubmitHandler<FieldValues> = (data) => {
     mutation.mutate(data as TLoginData);

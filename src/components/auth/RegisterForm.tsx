@@ -28,15 +28,6 @@ export default function RegisterForm({ onCancel }: IRegisterFormProps) {
     }
   });
 
-  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData(e.currentTarget);
-  //   const data = Object.fromEntries(formData.entries());
-
-  //   mutation.mutate(data as TUserData);
-  // };
-
   const handleRegisterUser: SubmitHandler<FieldValues> = (data) => {
     mutation.mutate(data as TUserData);
   };
