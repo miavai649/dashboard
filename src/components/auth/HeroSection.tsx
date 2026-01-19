@@ -45,7 +45,7 @@ export default function HeroSection() {
 
   return (
     <section className="p-8 md:p-12 flex flex-col justify-center gap-6 text-center md:text-left">
-      <div className="flex items-center justify-center md:justify-start gap-3 text-3xl font-bold text-[#67a7ff]">
+      <div className="flex items-center justify-center md:justify-start gap-3 text-3xl font-bold text-primary-300">
         <Logo />
         <span>Challenge</span>
       </div>
