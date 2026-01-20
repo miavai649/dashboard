@@ -5,6 +5,7 @@ import { MailIcon, LockIcon, UserIcon } from '../common/icons';
 import type { FieldValues, SubmitHandler } from 'react-hook-form';
 import { registerUser } from '../../lib/api';
 import { toast } from 'react-toastify';
+import PrimaryBtn from '../common/button/PrimaryBtn';
 
 type TUserData = {
   name: string;
@@ -66,11 +67,7 @@ export default function RegisterForm({ onCancel }: IRegisterFormProps) {
           name='password'
         />
         <div className='flex gap-3 pt-3'>
-          <button
-            type='submit'
-            className='px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 cursor-pointer'>
-            Create account
-          </button>
+          <PrimaryBtn buttonText='Sign up' />
           <button
             type='button'
             onClick={onCancel}
