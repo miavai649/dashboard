@@ -7,6 +7,7 @@ import CustomForm from '../common/form/CustomForm';
 import type { FieldValues, SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../../hook/useAuth';
 import { useNavigate } from 'react-router';
+import PrimaryBtn from '../common/button/PrimaryBtn';
 
 interface Props {
   onForgot?: () => void;
@@ -64,11 +65,8 @@ export default function LoginForm({ onForgot }: Props) {
           rules={{ required: 'Password is required' }}
         />
         <div className='flex gap-3 pt-3'>
-          <button
-            type='submit'
-            className='px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 transition cursor-pointer'>
-            Sign in
-          </button>
+       
+          <PrimaryBtn buttonText='Sign in' />
           <button
             type='button'
             onClick={onForgot}
