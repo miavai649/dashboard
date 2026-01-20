@@ -1,12 +1,12 @@
-import InputField from "../form/InputField";
-import { LockIcon, MailIcon } from "../icons";
-import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "../../lib/api";
-import { toast } from "react-toastify";
-import CustomForm from "../form/CustomForm";
-import type { FieldValues, SubmitHandler } from "react-hook-form";
-import { useAuth } from "../../hook/useAuth";
-import { useNavigate } from "react-router";
+import InputField from '../common/form/InputField';
+import { LockIcon, MailIcon } from '../common/icons';
+import { useMutation } from '@tanstack/react-query';
+import { loginUser } from '../../lib/api';
+import { toast } from 'react-toastify';
+import CustomForm from '../common/form/CustomForm';
+import type { FieldValues, SubmitHandler } from 'react-hook-form';
+import { useAuth } from '../../hook/useAuth';
+import { useNavigate } from 'react-router';
 
 interface Props {
   onForgot?: () => void;
@@ -25,12 +25,12 @@ export default function LoginForm({ onForgot }: Props) {
   const mutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (response) => {
-      toast.success(response?.message || "Login successful");
+      toast.success(response?.message || 'Login successful');
       login({ name: response?.data?.name, email: response?.data?.email });
-      navigate("/", { replace: true });
+      navigate('/', { replace: true });
     },
     onError: (error: string) => {
-      toast.error(error || "Login failed");
+      toast.error(error || 'Login failed');
     }
   });
 
@@ -40,39 +40,39 @@ export default function LoginForm({ onForgot }: Props) {
 
   return (
     <CustomForm onSubmit={handleLogin} isReset={true}>
-      <div className="space-y-5">
+      <div className='space-y-5'>
         <InputField
-          label="Email"
-          type="email"
-          name="email"
-          placeholder="you@example.com"
+          label='Email'
+          type='email'
+          name='email'
+          placeholder='you@example.com'
           icon={<MailIcon />}
           rules={{
-            required: "Email is required",
+            required: 'Email is required',
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Please enter a valid email"
+              message: 'Please enter a valid email'
             }
           }}
         />
         <InputField
-          label="Password"
-          type="password"
-          name="password"
-          placeholder="••••••••"
+          label='Password'
+          type='password'
+          name='password'
+          placeholder='••••••••'
           icon={<LockIcon />}
-          rules={{ required: "Password is required" }}
+          rules={{ required: 'Password is required' }}
         />
-        <div className="flex gap-3 pt-3">
+        <div className='flex gap-3 pt-3'>
           <button
-            type="submit"
-            className="px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 transition cursor-pointer">
+            type='submit'
+            className='px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 transition cursor-pointer'>
             Sign in
           </button>
           <button
-            type="button"
+            type='button'
             onClick={onForgot}
-            className="px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition cursor-pointer">
+            className='px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition cursor-pointer'>
             Forgot?
           </button>
         </div>
