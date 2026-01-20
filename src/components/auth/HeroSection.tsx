@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { Logo } from "../icons";
+import { useState, useEffect } from 'react';
+import { Logo } from '../common/icons';
 
 const quotes = [
-  "Keep pushing — small steps win races.",
-  "One more push. You’ve got this.",
-  "Learn fast. Ship faster.",
-  "Progress > Perfection."
+  'Keep pushing — small steps win races.',
+  'One more push. You’ve got this.',
+  'Learn fast. Ship faster.',
+  'Progress > Perfection.'
 ];
 
 export default function HeroSection() {
-  const [quote, setQuote] = useState("");
+  const [quote, setQuote] = useState('');
   const [cursorVisible, setCursorVisible] = useState(true);
 
   useEffect(() => {
@@ -44,16 +44,16 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="p-8 md:p-12 flex flex-col justify-center gap-6 text-center md:text-left">
-      <div className="flex items-center justify-center md:justify-start gap-3 text-3xl font-bold text-[#67a7ff]">
+    <section className='p-8 md:p-12 flex flex-col justify-center gap-6 text-center md:text-left'>
+      <div className='flex items-center justify-center md:justify-start gap-3 text-3xl font-bold text-primary-300'>
         <Logo />
         <span>Challenge</span>
       </div>
-      <div className="text-sm text-[rgba(255,255,255,0.68)] min-h-10 font-light">
+      <div className='text-sm text-[rgba(255,255,255,0.68)] min-h-10 font-light'>
         <span>{quote}</span>
-        <span className={`cursor ${cursorVisible ? "opacity-90" : "opacity-0"}`}>|</span>
+        <span className={`cursor ${cursorVisible ? 'opacity-90' : 'opacity-0'}`}>|</span>
       </div>
-      <p className="text-[rgba(255,255,255,0.68)] max-w-sm text-sm leading-relaxed">
+      <p className='text-[rgba(255,255,255,0.68)] max-w-sm text-sm leading-relaxed'>
         Sign in or create your Challenge account to continue.
       </p>
     </section>

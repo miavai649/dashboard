@@ -12,7 +12,7 @@ export default function AuthTabs({ isLogin, setIsLogin }: Props) {
           onClick={() => setIsLogin(tab === "Login")}
           className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${
             (isLogin && tab === "Login") || (!isLogin && tab === "Register")
-              ? "bg-blue-500/20 text-[#67a7ff] border border-blue-500/30 shadow-sm"
+              ? "bg-blue-500/20 text-primary-300 border border-blue-500/30 shadow-sm"
               : "text-gray-500 hover:text-gray-300"
           }`}>
           {tab}

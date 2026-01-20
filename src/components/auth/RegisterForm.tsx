@@ -1,10 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
-import CustomForm from "../form/CustomForm";
-import InputField from "../form/InputField";
-import { MailIcon, LockIcon, UserIcon } from "../icons";
-import type { FieldValues, SubmitHandler } from "react-hook-form";
-import { registerUser } from "../../lib/api";
-import { toast } from "react-toastify";
+import { useMutation } from '@tanstack/react-query';
+import CustomForm from '../common/form/CustomForm';
+import InputField from '../common/form/InputField';
+import { MailIcon, LockIcon, UserIcon } from '../common/icons';
+import type { FieldValues, SubmitHandler } from 'react-hook-form';
+import { registerUser } from '../../lib/api';
+import { toast } from 'react-toastify';
 
 type TUserData = {
   name: string;
@@ -20,11 +20,11 @@ export default function RegisterForm({ onCancel }: IRegisterFormProps) {
   const mutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      toast.success(data?.message || "Registration successful");
+      toast.success(data?.message || 'Registration successful');
       onCancel();
     },
     onError: (error: string) => {
-      toast.error(error || "Registration failed");
+      toast.error(error || 'Registration failed');
     }
   });
 
@@ -34,47 +34,47 @@ export default function RegisterForm({ onCancel }: IRegisterFormProps) {
 
   return (
     <CustomForm onSubmit={handleRegisterUser}>
-      <div className="space-y-5">
+      <div className='space-y-5'>
         <InputField
-          label="Full Name"
-          type="text"
-          placeholder="John Doe"
+          label='Full Name'
+          type='text'
+          placeholder='John Doe'
           icon={<UserIcon />}
-          rules={{ required: "Name is required" }}
-          name="name"
+          rules={{ required: 'Name is required' }}
+          name='name'
         />
         <InputField
-          label="Email"
-          type="email"
-          placeholder="you@example.com"
+          label='Email'
+          type='email'
+          placeholder='you@example.com'
           icon={<MailIcon />}
           rules={{
-            required: "Email is required",
+            required: 'Email is required',
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Please enter a valid email"
+              message: 'Please enter a valid email'
             }
           }}
-          name="email"
+          name='email'
         />
         <InputField
-          label="Password"
-          type="password"
-          placeholder="Enter your password"
+          label='Password'
+          type='password'
+          placeholder='Enter your password'
           icon={<LockIcon />}
-          rules={{ required: "Password is required" }}
-          name="password"
+          rules={{ required: 'Password is required' }}
+          name='password'
         />
-        <div className="flex gap-3 pt-3">
+        <div className='flex gap-3 pt-3'>
           <button
-            type="submit"
-            className="px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 cursor-pointer">
+            type='submit'
+            className='px-8 py-3 bg-linear-to-b from-[#67a7ff] to-[#2f7be6] text-white font-bold rounded-xl shadow-lg hover:shadow-blue-500/30 cursor-pointer'>
             Create account
           </button>
           <button
-            type="button"
+            type='button'
             onClick={onCancel}
-            className="px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition cursor-pointer">
+            className='px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition cursor-pointer'>
             Cancel
           </button>
         </div>
