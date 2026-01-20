@@ -8,6 +8,7 @@ import type { FieldValues, SubmitHandler } from 'react-hook-form';
 import { useAuth } from '../../hook/useAuth';
 import { useNavigate } from 'react-router';
 import PrimaryBtn from '../common/button/PrimaryBtn';
+import SecondaryBtn from '../common/button/SecondaryBtn';
 
 interface Props {
   onForgot?: () => void;
@@ -65,14 +66,9 @@ export default function LoginForm({ onForgot }: Props) {
           rules={{ required: 'Password is required' }}
         />
         <div className='flex gap-3 pt-3'>
-       
           <PrimaryBtn buttonText='Sign in' />
-          <button
-            type='button'
-            onClick={onForgot}
-            className='px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition cursor-pointer'>
-            Forgot?
-          </button>
+
+          <SecondaryBtn buttonText='Forgot password' onClick={onForgot} />
         </div>
       </div>
     </CustomForm>
