@@ -6,6 +6,7 @@ import type { FieldValues, SubmitHandler } from 'react-hook-form';
 import { registerUser } from '../../lib/api';
 import { toast } from 'react-toastify';
 import PrimaryBtn from '../common/button/PrimaryBtn';
+import SecondaryBtn from '../common/button/SecondaryBtn';
 
 type TUserData = {
   name: string;
@@ -68,12 +69,8 @@ export default function RegisterForm({ onCancel }: IRegisterFormProps) {
         />
         <div className='flex gap-3 pt-3'>
           <PrimaryBtn buttonText='Sign up' />
-          <button
-            type='button'
-            onClick={onCancel}
-            className='px-5 py-3 text-gray-400 border border-white/10 rounded-xl hover:bg-white/5 transition cursor-pointer'>
-            Cancel
-          </button>
+
+          <SecondaryBtn buttonText='Cancel' onClick={onCancel} />
         </div>
       </div>
     </CustomForm>
